@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-# Golden-eye
-=======
+
 # GoldenEye Project
 
 ## What you need
@@ -16,5 +14,3 @@
 ## Run de application
 
     mvn spring-boot:run
-
->>>>>>> bb5c2b3 (Base del proyecto)
