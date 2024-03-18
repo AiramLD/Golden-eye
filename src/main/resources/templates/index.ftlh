@@ -20,6 +20,7 @@
                  <input type="text" id="City" name="City" required><br><br>
 
                  <input type="submit" value="Send">
+                 <h2>your company email is this: </h2>
              </form>
     </body>
 </html>
