@@ -1,5 +1,4 @@
 package com.codebay.goldeneye;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;  
 import org.springframework.ui.Model;  
@@ -18,7 +17,10 @@ public class WebController {
         @RequestParam("department") String department,
         Model model
     ) {
-
+        model.addAttribute("name", name);
+        model.addAttribute("surname", surname);
+        model.addAttribute("office", office);
+        model.addAttribute("department", department);
         char nameMail = name.charAt(0);
         String surnameMail = surname.split(" ")[0];
         
@@ -27,4 +29,3 @@ public class WebController {
         return ResponseEntity.ok(email);
     }
 }
-

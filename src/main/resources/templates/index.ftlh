@@ -1,58 +1,50 @@
 <!DOCTYPE html>  
 <html lang="en">  
-    <head>
-        <meta charset="UTF-8">
-        <title>GoldenEye</title>
-    </head>
-    <body>
-        <h1>Form for employees</h1>
-         <form action="#" method="post" onsubmit="showDepartments()">
-                 <div class="container">
-                     <label for="name">Name:</label><br>
-                     <input type="text" id="name" name="name" required><br><br>
+<head>
+    <meta charset="UTF-8">
+    <title>GoldenEye</title>
+</head>
+<body>
+    <h1>Form for employees</h1>
+    <form action="#" method="post" onsubmit="showDepartments(event)">
+        <div class="container">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
 
-                     <label for="Surname">Surname:</label><br>
-                     <input type="text" id="Surname" name="Surname" required><br><br>
+            <label for="surname">surname:</label><br>
+            <input type="text" id="surname" name="surname" required><br><br>
 
-                     <div class="form-group">
-                         <label for="office">Office:</label><br>
-                         <select class="form-control" id="office" name="office" required onchange="showDepartments()">
-                             <option selected hidden disabled value="">Choose one of our offices</option>
-                             <option value="milan">Milán</option>
-                             <option value="spain">Spain</option>
-                             <option value="newYork">New York</option>
-                         </select>
-                     </div>
-                        <br>
+            <div class="form-group">
+                <label for="office">Office:</label><br>
+                <select class="form-control" id="office" name="office" required onchange="showDepartments()">
+                    <option selected hidden disabled value="">Choose one of our offices</option>
+                    <option value="milan">Milán</option>
+                    <option value="spain">Spain</option>
+                    <option value="newyork">New York</option>
+                </select>
+            </div>
+            <br>
 
-                     <div class="form-group" id="Department">
-                         <label for="department">Department:</label><br>
-                         <select class="form-control" id="department" name="department" required>
-                             <option selected hidden disabled value="">Choose a Department</option>
-                             <option value="design">Design</option>
-                             <option value="business">Business</option>
-                             <option value="advertising">Advertising</option>
-                             <option value="Research&andDevelopment"> Research & development </option>
+            <div class="form-group" id="department">
+                <label for="department">department:</label><br>
+                <select class="form-control" id="departmentSelect" name="department" required>
+                    <option selected hidden disabled value="">Choose a department</option>
+                    <option value="design">Design</option>
+                    <option value="business">Business</option>
+                    <option value="advertising">Advertising</option>
+                    <option value="research&development">Research & development</option>
+                </select>
+            </div>
 
-                         </select>
-                     </div>
-
-                     <input type="submit" value="Send">
-                 </div>
-             </form>
-    </body>
-</html>
-<script>
-        
-        public function showDepartments(){
+            <input type="submit" value="Send">
+        </div>
+    </form>
+    <script>
+        function showDepartments(event) {
+            event.preventDefault(); 
             let selectOffice = document.getElementById("office");
-            let selectDepartment = document.getElementById("department");
-            let hideDepartment = document.getElementById("hideSelect");
-        }
+            let selectDepartment = document.getElementById("departmentSelect");
 
-        selectOffice.addEventListener("change", function() {
-
-            hideDepartment.classList.remove('d-none');
             let selectedOffice = selectOffice.value;
 
             selectDepartment.innerHTML = "";
@@ -72,7 +64,7 @@
             let option4 = document.createElement("option");
             option4.value = "research&development";
             option4.text = "Research & development";
-            
+
             switch (selectedOffice) {
                 case "milan":
                     selectDepartment.add(option1);
@@ -90,34 +82,9 @@
                 default:
                     break;
             }
-
-            selectDepartment.disabled = false;
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("emailForm").addEventListener("submit", function(event) {
-            event.preventDefault(); 
-        
-            let xhr = new XMLHttpRequest();
-        
-            xhr.open("POST", "/generate", true);
-        
-            xhr.onload = function() {
-                let errorDiv = document.getElementById("errorMessage");
-                let emailDiv = document.getElementById("generatedEmail");
-                if (xhr.status === 200) {
-                    errorDiv.classList.add('d-none');
-                    emailDiv.innerHTML = xhr.responseText.toLowerCase();
-                } else {
-                    emailDiv.innerHTML = "";
-                    errorDiv.classList.remove('d-none');
-                    errorDiv.innerHTML = "Error: " + xhr.status;
-                }
-            };
-        
-            xhr.send(new FormData(this));
-            });
-        });
-</script>
+        }
+    </script>
+</body>
+</html>
 
   
