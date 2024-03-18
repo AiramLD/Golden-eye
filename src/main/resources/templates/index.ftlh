@@ -44,9 +44,11 @@
 </html>
 <script>
         
-        let selectOffice = document.getElementById("office");
-        let selectDepartment = document.getElementById("department");
-        let hideDepartment = document.getElementById("hideSelect");
+        public function showDepartments(){
+            let selectOffice = document.getElementById("office");
+            let selectDepartment = document.getElementById("department");
+            let hideDepartment = document.getElementById("hideSelect");
+        }
 
         selectOffice.addEventListener("change", function() {
 
