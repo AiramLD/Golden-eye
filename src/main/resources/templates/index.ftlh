@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Form for employees</h1>
-    <form action="#" method="post">
+    <form action="/generate" method="post">
         <div class="container">
             <label for="name">Name:</label><br>
             <input type="text" id="name" name="name" required><br><br>
@@ -39,6 +39,10 @@
             <input type="submit" value="Send">
         </div>
     </form>
+    <div>
+    <h2>Your generated is Email:</h2>
+    
+</div>
     <script>
         // Función para mostrar los departamentos basados en la selección de la oficina
         function showDepartments() {
