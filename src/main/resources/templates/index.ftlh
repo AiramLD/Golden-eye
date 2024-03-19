@@ -88,7 +88,7 @@
         <div class="card" style="width: 30rem;">
             <div class="card-body" style="text-align: center;" >
                 <h1>Email generator for Goldeneye</h1>
-                <form action="/postEmail" method="post" style="display: flex; flex-direction: column; align-items: center;">
+            <form action="/postEmail" method="post" onsubmit="return validateForm()" style="display: flex; flex-direction: column; align-items: center;">
                     <div>
                         <label for="name" class="form-label">First Name:</label>
                         <input class="form-control" type="text" name="name" id="name" required>
@@ -119,6 +119,27 @@
         </div>
 
        <script>
+        function validateForm() {
+            var nameInput = document.getElementById('name').value;
+            var surnameInput = document.getElementById('surname').value;
+            var regex = /^[A-Za-z]+$/;
+
+            if (!regex.test(nameInput) || !regex.test(surnameInput)) {
+                alert("Solo se permiten letras en el nombre y el apellido.");
+                return false; 
+            }
+
+            return true; // Permite que el formulario se envíe si la validación es exitosa
+        }
+
+        function validateInput(input) {
+            var regex = /^[A-Za-z]+$/; 
+
+            if (!regex.test(input.value)) {
+                input.value = input.value.replace(/[^A-Za-z]/g, ''); 
+            }
+        }
+
     document.addEventListener('DOMContentLoaded', function() {
         const departments = {
             milan: ['Design', 'Business', 'Advertising'],
