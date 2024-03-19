@@ -1,8 +1,8 @@
-<!DOCTYPE html>  
-<html lang="en">  
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Error</title>
+    <title>Manipulation Result</title>
 </head>
 <style>
     .container {
@@ -16,19 +16,15 @@
         font: 1.2rem Arial, sans-serif;
         color: #343a40;
     }
-    div {
+    h1 {
+        color: #343a40;
+        font: 1.5rem Arial, sans-serif;
+        margin-bottom: 1rem;
         text-align: center;
-        margin-top: 30px;
-        margin-bottom: 30px;
+        font-weight: bold;
     }
-</style>
 <body class="container">
-  <div style="text-align: center;">
-    <h1>Error: ${errorStatus}</h1>
-    <#if errorMessage??>
-        <p>Message: ${errorMessage}</p>
-    </#if>
-    <p><a href="/">Back to Home</a></p>
-  </div>
+    <h1>Manipulation Result</h1>
+    <p>The manipulated full name is: ${manipulatedFullName}</p>
 </body>
 </html>

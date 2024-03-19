@@ -4,41 +4,122 @@
     <meta charset="UTF-8">
     <title>Goldeneye</title>
 </head>
-<body class="container">
-    <div>
-        <div >
-            <h1>Goldeneye</h1>
-            <p></p>
-            <form action="/getEmail">
-                <div>
-                    <label for="firstName" class="form-label">First Name:</label>
-                    <input class="form-control" type="text" name="firstName" id="firstName" required>
-                </div>
-                <div>
-                    <label for="surname" class="form-label">Surname:</label>
-                    <input class="form-control" type="text" name="surname" id="surname" required>
-                </div>
-                <div>
-                    <label for="office" class="form-label">Office:</label>
-                    <select name="office" id="office" class="form-select" onchange="updateDepartment()" required>
-                        <option value="" selected disabled>Select an office</option>
-                        <option value="milan">Milan</option>
-                        <option value="spain">Spain</option>
-                        <option value="newyork">New York</option>
-                    </select>
-                </div>
-                <div id="dept" hidden>
-                    <label for="department" class="form-label">Department:</label>
-                    <select name="department" id="department" class="form-select" required></select>
-                </div>
-                <div class="row justify-content-center mt-2">
-                    <button type="submit" class="btn btn-primary">Generate</button>
-                </div>
-            </form>
-        </div>
-    </div>
+<style>
+    body, .container, .card, form, label, input, select, .btn-primary {
+        font: 1.2rem Arial, sans-serif;
+        color: #343a40;
+    }
 
-    <script>
+    body {
+        background: #f8f9fa;
+    }
+
+    .container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 2rem;
+    }
+
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
+        width: 30rem;
+        margin: 2rem;
+        padding: 1rem;
+        background: #fff;
+        border-radius: .5rem;
+        border: 1px solid #ced4da;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: 2rem 0;
+    }
+
+    label {
+        margin: 1rem 0 .5rem;
+        display: block;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    input, select {
+        margin: .5rem 0;
+        padding: .5rem;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        width: 100%;
+        box-sizing: border-box;
+        font-weight: bold;
+        background: url('data:image/svg+xml;utf8,<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="#343a40" d="M15.2 6.3l-2.1-2.1c-.4-.4-1-.4-1.4 0L10 6.3 7.5 3.9c-.4-.4-1-.4-1.4 0l-2.1 2.1c-.4.4-.4 1 0 1.4L7.5 10l-2.4 2.5c-.4.4-.4 1 0 1.4l2.1 2.1c.4.4 1 .4 1.4 0L10 13.7l2.5 2.4c.4.4 1 .4 1.4 0l2.1-2.1c.4-.4.4-1 0-1.4L12.5 10l2.4-2.5c.4-.4.4-1 0-1.4z"/></svg>') no-repeat right .75rem center/8px 10px;
+    }
+
+    .btn-primary {
+        background: #007bff;
+        border-color: #007bff;
+        color: #fff;
+        font-weight: bold;
+        padding: .5rem 1rem;
+        border-radius: .25rem;
+        margin-top: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .btn-primary:hover {
+        transform: none;
+    }
+</style>
+
+    <body class="container" style="display: flex; justify-content: center; height: 100vh;">
+        <div class="card" style="width: 30rem;">
+            <div class="card-body" style="text-align: center;" >
+                <h1>Email generator for Goldeneye</h1>
+                <form action="/postEmail" method="post" style="display: flex; flex-direction: column; align-items: center;">
+                    <div>
+                        <label for="name" class="form-label">First Name:</label>
+                        <input class="form-control" type="text" name="name" id="name" required>
+                    </div>
+                    <div>
+                        <label for="surname" class="form-label">Surname:</label>
+                        <input class="form-control" type="text" name="surname" id="surname" required>
+                    </div>
+                    <div>
+                        <label for="office" class="form-label">Office:</label>
+                        <select name="office" id="office" class="form-select" onchange="updateDepartment()" required>
+                            <option value="" selected disabled>Select an office</option>
+                            <option value="milan">Milan</option>
+                            <option value="spain">Spain</option>
+                            <option value="newyork">New York</option>
+                        </select>
+                    </div>
+                    <div id="department_div" style="display: none;">
+                        <label for="department" class="form-label">Department:</label>
+                        <select name="department" id="department" class="form-select" required>
+                        </select>
+                    </div>
+                    <div style="margin-top: 1rem;" >
+                        <button type="submit" class="btn btn-primary">Generate</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+       <script>
+    document.addEventListener('DOMContentLoaded', function() {
         const departments = {
             milan: ['Design', 'Business', 'Advertising'],
             spain: ['Research & development', 'Business'],
@@ -46,19 +127,21 @@
         };
 
         function updateDepartment() {
-            const office = document.getElementById('office');
+            const office = document.getElementById('office').value;
             const department = document.getElementById('department');
-            const dept = document.getElementById('dept');
-            dept.hidden = false;
-            const selectedOffice = office.value;
+            const departmentDiv = document.getElementById('department_div');
+            departmentDiv.style.display = 'block';
 
             department.innerHTML = '';
-
-            departments[selectedOffice].forEach(dept => {
-                const option = new Option(dept, dept);
+            departments[office]?.forEach(departmentName => {
+                const option = new Option(departmentName, departmentName);
                 department.add(option);
             });
         }
-    </script>
-</body>
-</html>
+
+        document.getElementById('office').addEventListener('change', updateDepartment);
+    });
+</script>
+
+    </body>
+    </html>
