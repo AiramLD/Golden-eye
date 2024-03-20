@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ExceptionController implements ErrorController {
 
-
     @RequestMapping("/error")
     public ModelAndView handleError(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("error");
@@ -26,25 +25,21 @@ public class ExceptionController implements ErrorController {
         modelAndView.addObject("errorMessage", errorMessage);
         modelAndView.addObject("requestUri", requestUri);
 
-        handleSpecificErrorMessages(errorStatus, modelAndView);
-
-        return modelAndView;
-    }
-
-    private void handleSpecificErrorMessages(int errorStatus, ModelAndView modelAndView) {
         switch (errorStatus) {
-            case 404: // HttpStatus.NOT_FOUND.value():
+            case 404:
                 modelAndView.addObject("errorMessage", "La página solicitada no fue encontrada.");
                 break;
-            case 500: // HttpStatus.INTERNAL_SERVER_ERROR.value():
+            case 500:
                 modelAndView.addObject("errorMessage", "Se produjo un error interno en el servidor.");
                 break;
             case 200:
-                modelAndView.addObject("errorMessage", "La pagina parece estar cargada. Por favor, intentalo nuevamente más tarde.");
+                modelAndView.addObject("errorMessage", "La página parece estar cargada. Por favor, inténtalo nuevamente más tarde.");
                 break;
             default:
                 break;
         }
+
+        return modelAndView;
     }
     
     @ExceptionHandler(Exception.class)
@@ -53,7 +48,7 @@ public class ExceptionController implements ErrorController {
 
         ModelAndView modelAndView = new ModelAndView("error");
         modelAndView.addObject("errorStatus", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        modelAndView.addObject("errorMessage", "Se produjo un error en la aplicación. Por favor, intentalo nuevamente más tarde.");
+        modelAndView.addObject("errorMessage", "Se produjo un error en la aplicación. Por favor, inténtalo nuevamente más tarde.");
         return modelAndView;
     }
 
@@ -74,3 +69,4 @@ public class ExceptionController implements ErrorController {
         return "/error";
     }
 }
+    
