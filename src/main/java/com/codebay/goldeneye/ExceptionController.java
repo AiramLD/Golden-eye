@@ -29,11 +29,11 @@ public class ExceptionController implements ErrorController {
             case 404:
                 modelAndView.addObject("errorMessage", "La página solicitada no fue encontrada.");
                 break;
+            case 405:
+                modelAndView.addObject("errorMessage", "El método solicitado no fue permitido, por favor vuelva al formulario");
+                break;
             case 500:
                 modelAndView.addObject("errorMessage", "Se produjo un error interno en el servidor.");
-                break;
-            case 200:
-                modelAndView.addObject("errorMessage", "La página parece estar cargada. Por favor, inténtalo nuevamente más tarde.");
                 break;
             default:
                 break;
@@ -69,4 +69,3 @@ public class ExceptionController implements ErrorController {
         return "/error";
     }
 }
-    
