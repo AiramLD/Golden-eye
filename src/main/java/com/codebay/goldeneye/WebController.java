@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
+// Importa la clase correspondiente de la API para modificar nombres y apellidos
 
 @Controller
 public class WebController {
@@ -39,34 +40,29 @@ public class WebController {
         return emailBuilder.toString();
     }
 
-   @GetMapping("/manipulate")
-   public String manipulate(Model model) {
-       model.addAttribute("fullName", "");
-       return "manipulate";
-   }
-   
-   @PostMapping("/manipulate")
-   public String manipulateString(@RequestParam("fullName") String fullName, Model model) {
-       if (fullName == null || fullName.trim().isEmpty()) {
-           model.addAttribute("error", "El nombre completo no puede estar vacío.");
-           return "manipulate";
-       }
-   
-       String[] parts = fullName.split("\\s+");
-       if (parts.length < 2) {
-           model.addAttribute("error", "El nombre completo debe contener al menos un nombre y un apellido.");
-           return "manipulate";
-       }
-   
-       String name = parts[0];
-       String surname = parts[parts.length - 1];
-   
-       String manipulatedName = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
-   
-       String manipulatedFullName = manipulatedName + " " + surname;
-   
-       model.addAttribute("manipulatedFullName", manipulatedFullName);
-   
-       return "result";
-   }
+
+    
+    @GetMapping("/manipulate")
+    private String manipulateFullName(String fullName) {
+        String[] parts = fullName.split("\\s+");
+        StringBuilder manipulatedFullNameBuilder = new StringBuilder();
+    
+        for (String part : parts) {
+            String manipulatedPart = part.substring(0, 1).toUpperCase() + part.substring(1).toLowerCase();
+    
+            manipulatedFullNameBuilder.append(manipulatedPart).append(" ");
+        }
+    
+        String manipulatedFullName = manipulatedFullNameBuilder.toString().trim();
+    
+        // Create an instance to the class InappropriateWordsRemover
+
+        // InappropriateWordsRemover remover = new InappropriateWordsRemover();
+        // String cleanedFullName = remover.removeInappropriateWords(manipulatedFullName);
+    
+
+        // Return the cleaned full name
+        return manipulatedFullName;
+    }
+    
 }

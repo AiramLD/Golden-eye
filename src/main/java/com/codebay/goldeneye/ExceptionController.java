@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 @Controller
 public class ExceptionController implements ErrorController {
@@ -42,7 +41,7 @@ public class ExceptionController implements ErrorController {
                 modelAndView.addObject("errorMessage", "Se produjo un error interno en el servidor.");
                 break;
             case 200:
-                modelAndView.addObject("errorMessage", "Se produjo un error en la aplicación. Por favor, intenta nuevamente más tarde.");
+                modelAndView.addObject("errorMessage", "Se produjo un error en la aplicación. Por favor, intentalo nuevamente más tarde.");
                 break;
             default:
                 break;

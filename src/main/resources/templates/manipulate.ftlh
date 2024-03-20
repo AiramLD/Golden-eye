@@ -23,8 +23,10 @@
         text-align: center;
         font-weight: bold;
     }
+</style>
 <body class="container">
     <h1>Manipulation Result</h1>
     <p>The manipulated full name is: ${manipulatedFullName}</p>
+    <p>The generated email is: ${email}</p>
 </body>
 </html>
