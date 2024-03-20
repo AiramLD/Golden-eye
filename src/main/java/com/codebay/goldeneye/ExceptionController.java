@@ -14,9 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ExceptionController implements ErrorController {
 
-    private static final String ERROR_MAPPING_PATH = "/error";
 
-    @RequestMapping(ERROR_MAPPING_PATH)
+    @RequestMapping("/error")
     public ModelAndView handleError(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("error");
         int errorStatus = (Integer) request.getAttribute("javax.servlet.error.status_code");
@@ -41,7 +40,7 @@ public class ExceptionController implements ErrorController {
                 modelAndView.addObject("errorMessage", "Se produjo un error interno en el servidor.");
                 break;
             case 200:
-                modelAndView.addObject("errorMessage", "Se produjo un error en la aplicación. Por favor, intentalo nuevamente más tarde.");
+                modelAndView.addObject("errorMessage", "La pagina parece estar cargada. Por favor, intentalo nuevamente más tarde.");
                 break;
             default:
                 break;
@@ -50,12 +49,11 @@ public class ExceptionController implements ErrorController {
     
     @ExceptionHandler(Exception.class)
     public ModelAndView handleException(Exception ex) {
-        // Log the exception message for debugging purposes
         ex.printStackTrace();
 
         ModelAndView modelAndView = new ModelAndView("error");
         modelAndView.addObject("errorStatus", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        modelAndView.addObject("errorMessage", "Se produjo un error en la aplicación. Por favor, intenta nuevamente más tarde.");
+        modelAndView.addObject("errorMessage", "Se produjo un error en la aplicación. Por favor, intentalo nuevamente más tarde.");
         return modelAndView;
     }
 
@@ -73,6 +71,6 @@ public class ExceptionController implements ErrorController {
 
     @Override
     public String getErrorPath() {
-        return ERROR_MAPPING_PATH;
+        return "/error";
     }
 }

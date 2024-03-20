@@ -129,7 +129,7 @@
                 return false; 
             }
 
-            return true; // Permite que el formulario se envíe si la validación es exitosa
+            return true; 
         }
 
         function validateInput(input) {
@@ -162,7 +162,7 @@
 
         document.getElementById('office').addEventListener('change', updateDepartment);
     });
-</script>
+        </script>
 
     </body>
-    </html>
+</html>
