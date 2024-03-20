@@ -64,7 +64,6 @@
         width: 100%;
         box-sizing: border-box;
         font-weight: bold;
-        background: url('data:image/svg+xml;utf8,<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="#343a40" d="M15.2 6.3l-2.1-2.1c-.4-.4-1-.4-1.4 0L10 6.3 7.5 3.9c-.4-.4-1-.4-1.4 0l-2.1 2.1c-.4.4-.4 1 0 1.4L7.5 10l-2.4 2.5c-.4.4-.4 1 0 1.4l2.1 2.1c.4.4 1 .4 1.4 0L10 13.7l2.5 2.4c.4.4 1 .4 1.4 0l2.1-2.1c.4-.4.4-1 0-1.4L12.5 10l2.4-2.5c.4-.4.4-1 0-1.4z"/></svg>') no-repeat right .75rem center/8px 10px;
     }
 
     .btn-primary {
